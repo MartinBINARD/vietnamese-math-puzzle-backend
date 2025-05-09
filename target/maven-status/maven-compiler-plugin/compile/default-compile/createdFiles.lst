@@ -1,0 +1,5 @@
+com/puzzle/solutionapi/controller/SolutionController.class
+com/puzzle/solutionapi/entity/Solution.class
+com/puzzle/solutionapi/repository/SolutionRepository.class
+com/puzzle/solutionapi/SolutionApiApplication.class
+com/puzzle/solutionapi/service/SolutionService.class
