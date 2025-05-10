@@ -18,7 +18,7 @@
   <name>puzzle-backend-martin-binard</name>
 
   <properties>
-    <java.version>24</java.version>
+    <java.version>17</java.version>
   </properties>
 
   <dependencies>
@@ -26,13 +26,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <!-- Add dependencies here -->
-    <dependency>
-      <groupId>jakarta.persistence</groupId>
-      <artifactId>jakarta.persistence-api</artifactId>
-      <version>3.1.0</version>
     </dependency>
 
     <!-- JPA ORM -->
