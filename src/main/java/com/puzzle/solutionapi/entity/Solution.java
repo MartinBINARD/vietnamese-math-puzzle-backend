@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Solution {
 
@@ -14,15 +16,20 @@ public class Solution {
   private Long id;
 
   @Column(columnDefinition = "TEXT")
-  private String steps; // JSON string (frontend-encoded steps)
+  private String steps;
 
   private double result;
-  private boolean isCorrect;
-  private boolean isUserSolution;
+
+  @JsonProperty("isCorrect")
+  private boolean correct;
+
+  @JsonProperty("isUserSolution")
+  private boolean userSolution;
+
   private long durationMs;
   private String createdAt;
 
-  // Getters
+  // GETTERS
   public Long getId() {
     return id;
   }
@@ -36,11 +43,11 @@ public class Solution {
   }
 
   public boolean isCorrect() {
-    return isCorrect;
+    return correct;
   }
 
   public boolean isUserSolution() {
-    return isUserSolution;
+    return userSolution;
   }
 
   public long getDurationMs() {
@@ -51,7 +58,7 @@ public class Solution {
     return createdAt;
   }
 
-  // Setters
+  // SETTERS
   public void setId(Long id) {
     this.id = id;
   }
@@ -65,11 +72,11 @@ public class Solution {
   }
 
   public void setCorrect(boolean correct) {
-    isCorrect = correct;
+    this.correct = correct;
   }
 
   public void setUserSolution(boolean userSolution) {
-    isUserSolution = userSolution;
+    this.userSolution = userSolution;
   }
 
   public void setDurationMs(long durationMs) {

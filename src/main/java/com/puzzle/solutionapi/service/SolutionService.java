@@ -1,10 +1,11 @@
 package com.puzzle.solutionapi.service;
 
-import com.puzzle.solutionapi.entity.Solution;
-import com.puzzle.solutionapi.repository.SolutionRepository;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.puzzle.solutionapi.entity.Solution;
+import com.puzzle.solutionapi.repository.SolutionRepository;
 
 @Service
 public class SolutionService {
@@ -42,19 +43,23 @@ public class SolutionService {
     if (!updated.isCorrect()) {
       throw new IllegalArgumentException("Updated solution must be correct");
     }
+
     return repository.findById(id).map(existing -> {
       updated.setId(existing.getId());
+
       return repository.save(updated);
     }).orElse(null);
   }
 
   public boolean deleteSolutionById(Long id) {
     repository.deleteById(id);
+
     return true;
   }
 
   public boolean deleteAllSolutions() {
     repository.deleteAll();
+
     return true;
   }
 }
