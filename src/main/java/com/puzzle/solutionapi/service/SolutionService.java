@@ -2,6 +2,7 @@ package com.puzzle.solutionapi.service;
 
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.puzzle.solutionapi.entity.Solution;
@@ -52,14 +53,25 @@ public class SolutionService {
   }
 
   public boolean deleteSolutionById(Long id) {
-    repository.deleteById(id);
+    try {
+      repository.deleteById(id);
+      return true;
+    } catch (EmptyResultDataAccessException ex) {
+      System.err.println("Failed to delete : id not found: " + id);
 
-    return true;
+      return false;
+    }
   }
 
   public boolean deleteAllSolutions() {
-    repository.deleteAll();
+    try {
+      repository.deleteAll();
 
-    return true;
+      return true;
+    } catch (Exception ex) {
+      System.err.println("Failed to delete all solutions: " + ex.getMessage());
+
+      return false;
+    }
   }
 }
