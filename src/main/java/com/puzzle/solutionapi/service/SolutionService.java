@@ -29,7 +29,8 @@ public class SolutionService {
     if (solution.isCorrect()) {
       return repository.save(solution);
     }
-    throw new IllegalArgumentException("Solution must be correct to be saved");
+
+    return solution;
   }
 
   public List<Solution> createSolutions(List<Solution> solutions) {
@@ -55,6 +56,7 @@ public class SolutionService {
   public boolean deleteSolutionById(Long id) {
     try {
       repository.deleteById(id);
+
       return true;
     } catch (EmptyResultDataAccessException ex) {
       System.err.println("Failed to delete : id not found: " + id);

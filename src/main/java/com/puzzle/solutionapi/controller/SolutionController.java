@@ -44,12 +44,13 @@ public class SolutionController {
 
   // POST one user solution
   @PostMapping("/user")
-  public ResponseEntity<?> createUserSolution(@RequestBody Solution solution) {
+  public ResponseEntity<Solution> createUserSolution(@RequestBody Solution solution) {
     if (!solution.isUserSolution() || !solution.isCorrect()) {
-      return ResponseEntity.badRequest().body("User solution must be correct and marked as user-generated.");
+      return ResponseEntity.ok(solution);
     }
 
-    return ResponseEntity.ok(service.createSolution(solution));
+    Solution saved = service.createSolution(solution);
+    return ResponseEntity.ok(saved);
   }
 
   // POST batch (algorithm-generated)
