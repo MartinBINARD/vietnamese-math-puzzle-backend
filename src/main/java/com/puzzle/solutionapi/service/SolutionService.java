@@ -25,14 +25,16 @@ public class SolutionService {
     return repository.findById(id).orElse(null);
   }
 
+  // POST one user solution
   public Solution createSolution(Solution solution) {
-    if (solution.isCorrect()) {
-      return repository.save(solution);
+    if (!solution.isUserSolution()) {
+      throw new IllegalArgumentException("Posted solution must be user creation");
     }
 
-    return solution;
+    return repository.save(solution);
   }
 
+  // POST batch (algorithm-generated)
   public List<Solution> createSolutions(List<Solution> solutions) {
     boolean allCorrect = solutions.stream().allMatch(Solution::isCorrect);
     if (allCorrect) {
@@ -41,9 +43,10 @@ public class SolutionService {
     throw new IllegalArgumentException("All solutions must be correct");
   }
 
+  // PUT one user solution
   public Solution updateSolution(Long id, Solution updated) {
-    if (!updated.isCorrect()) {
-      throw new IllegalArgumentException("Updated solution must be correct");
+    if (!updated.isUserSolution()) {
+      throw new IllegalArgumentException("Updated solution must be user creation");
     }
 
     return repository.findById(id).map(existing -> {

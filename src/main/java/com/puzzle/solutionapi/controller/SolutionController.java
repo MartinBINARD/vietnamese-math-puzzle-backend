@@ -44,12 +44,14 @@ public class SolutionController {
 
   // POST one user solution
   @PostMapping("/user")
-  public ResponseEntity<Solution> createUserSolution(@RequestBody Solution solution) {
-    if (!solution.isUserSolution() || !solution.isCorrect()) {
-      return ResponseEntity.ok(solution);
+  public ResponseEntity<?> createUserSolution(@RequestBody Solution solution) {
+    if (!solution.isUserSolution()) {
+      return ResponseEntity.badRequest()
+          .body("POST: Solution must be have send by user.");
     }
 
     Solution saved = service.createSolution(solution);
+
     return ResponseEntity.ok(saved);
   }
 
@@ -67,12 +69,13 @@ public class SolutionController {
     return ResponseEntity.ok(service.createSolutions(solutions));
   }
 
-  // PUT
+  // PUT one user solution
   @PutMapping("/{id}")
   public ResponseEntity<?> updateSolution(@PathVariable Long id, @RequestBody Solution solution) {
 
-    if (!solution.isCorrect()) {
-      return ResponseEntity.badRequest().body("Updated solution must be correct.");
+    if (!solution.isUserSolution()) {
+      return ResponseEntity.badRequest()
+          .body("PUT: Solution must be have send by user.");
     }
     Solution updated = service.updateSolution(id, solution);
 
