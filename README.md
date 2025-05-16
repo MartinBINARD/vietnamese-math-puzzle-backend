@@ -1,6 +1,7 @@
 # Puzzle Solver API
 
 API REST simplifiée permettant d'enregistrer, modifier et consulter des solutions générées par un algorithme de résolution mathématique (type casse-tête).
+Les solutions générées écrasent toutes les solutions de la base de données, seules les solutions créées par l'utilisateur sont ajoutées à la liste des solutions.
 
 ---
 
@@ -21,9 +22,9 @@ API REST simplifiée permettant d'enregistrer, modifier et consulter des solutio
 | -------- | ---------------------- | --------------------------------------------------------- |
 | `GET`    | `/solutions`           | Récupère toutes les solutions                             |
 | `GET`    | `/solutions/{id}`      | Récupère une solution spécifique                          |
-| `POST`   | `/solutions/user`      | Crée une nouvelle solution valide (`isCorrect: true`)     |
+| `POST`   | `/solutions/user`      | Crée une nouvelle solution valide                         |
 | `POST`   | `/solutions/generated` | Crée une liste de solutions genérées                      |
-| `PUT`    | `/solutions/{id}`      | Met à jour une solution par son ID (si `isCorrect: true`) |
+| `PUT`    | `/solutions/{id}`      | Met à jour une solution par son ID                        |
 | `DELETE` | `/solutions`           | Supprime toutes les solutions en base                     |
 | `DELETE` | `/solutions/{id}`      | Supprime une solution par son ID                          |
 
